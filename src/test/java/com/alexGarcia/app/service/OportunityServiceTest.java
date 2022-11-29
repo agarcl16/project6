@@ -26,6 +26,16 @@ public class OportunityServiceTest {
 	 * We have to create an oportunity, but we cannot create it if there is no
 	 * contact.
 	 */
+	
+	@Test
+	public void testIsOportunity() {
+
+		Oportunity op = new Oportunity("Alex", "alex09945@gmail.com", "+34638731011");
+		
+		assertFalse(oportunityService.isOportunity(op));
+		
+	}
+	
 	@Test
 	public void testCreateOportunity() {
 
