@@ -71,11 +71,10 @@ public class Oportunity {
 	 * @param email
 	 * @param phone
 	 */
-	public Oportunity(Long id, String name, Client client, String email, String phone) {
+	public Oportunity(Long id, String name, String email, String phone) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.client = client;
 		this.email = email;
 		this.phone = phone;
 	}

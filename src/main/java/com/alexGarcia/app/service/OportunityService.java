@@ -4,7 +4,7 @@ import com.alexGarcia.app.entity.Oportunity;
 
 public interface OportunityService {
 
-	boolean addOportunity(Oportunity op);
+	Oportunity addOportunity(Oportunity op);
 	
 	boolean isOportunity(Oportunity op);
 

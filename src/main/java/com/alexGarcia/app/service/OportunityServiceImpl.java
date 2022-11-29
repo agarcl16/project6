@@ -10,23 +10,23 @@ import com.alexGarcia.app.repository.ContactRepository;
 import com.alexGarcia.app.repository.OportunityRepository;
 
 @Service
-public class OportunityServiceImpl implements OportunityService{
-	
+public class OportunityServiceImpl implements OportunityService {
+
 	@Autowired
 	private OportunityRepository oportunityRepository;
-	
+
 	@Autowired
 	private ContactRepository contactRepository;
 
 	@Override
-	public boolean addOportunity(Oportunity op) {
-		oportunityRepository.save(op);
-		return false;
+	public Oportunity addOportunity(Oportunity op) {
+
+		return oportunityRepository.save(op);
 	}
 
+	@Override
 	public boolean isOportunity(Oportunity op) {
-		// TODO Auto-generated method stub
-		return true;
+		return oportunityRepository.getByName(op.getName());
 	}
 
 }
