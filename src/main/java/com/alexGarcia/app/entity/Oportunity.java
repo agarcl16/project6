@@ -52,6 +52,19 @@ public class Oportunity {
 	}
 
 	/**
+	 * @param name
+	 * @param email
+	 * @param phone
+	 * @param contacts
+	 */
+	public Oportunity(String name, String email, String phone) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+	}
+
+	/**
 	 * @param id
 	 * @param name
 	 * @param client

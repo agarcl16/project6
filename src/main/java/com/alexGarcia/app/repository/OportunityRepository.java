@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.alexGarcia.app.entity.Oportunity;
 
-public interface OportunityRepsotory extends JpaRepository<Oportunity,Long> {
+public interface OportunityRepository extends JpaRepository<Oportunity,Long> {
 
 }
