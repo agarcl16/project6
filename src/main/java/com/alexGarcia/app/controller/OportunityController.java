@@ -1,5 +1,6 @@
 package com.alexGarcia.app.controller;
 
+import com.alexGarcia.app.dto.OportunityDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,11 @@ public class OportunityController {
 	private OportunityService oportunityService;
 	
 	@PostMapping("/addOportunity")
-	public ResponseEntity addOportunity(@RequestBody Oportunity op) {
-		Oportunity newOp = oportunityService.addOportunity(op);
+	public ResponseEntity addOportunity(@RequestBody OportunityDTO op) {
+
+		Oportunity op1 = new Oportunity();
+
+		Oportunity newOp = oportunityService.addOportunity(op1);
 		return ResponseEntity.status(HttpStatus.OK).body(newOp.print());
 	}
 }

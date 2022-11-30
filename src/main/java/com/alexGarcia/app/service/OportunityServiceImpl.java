@@ -1,9 +1,11 @@
 package com.alexGarcia.app.service;
 
+import java.io.InvalidObjectException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 
+import com.alexGarcia.app.dto.OportunityDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +49,11 @@ public class OportunityServiceImpl implements OportunityService {
 	@Override
 	public Oportunity isOportunity(Oportunity op) {
 		return oportunityRepository.findByName(op.getName());
+	}
+
+	@Override
+	public OportunityDTO checkInfo(OportunityDTO op) throws InvalidObjectException {
+		return null;
 	}
 
 }
