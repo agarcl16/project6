@@ -76,6 +76,21 @@ public class OportunityServiceTest {
         Assert.assertThrows("The information must include description",InvalidObjectException.class,() -> { oportunityService.checkInfo(op);});
 
         op.setDescription("prueba");
+
+        /**
+         * Check if Client is true => BussinessName mustNotBe null
+         */
+
+        op.setFutureClient("T");
+        Assert.assertThrows("There is no BussinessName",InvalidObjectException.class,() -> { oportunityService.checkInfo(op);});
+
+        op.setFutureAction("prueba");
+        Assert.assertThrows("Not valid Date",InvalidObjectException.class,() -> { oportunityService.checkInfo(op);});
+
+        op.setFutureAction("2021-10-10");
+        Assert.assertThrows("Future Date must be after today",InvalidObjectException.class,() -> { oportunityService.checkInfo(op);});
+
+        op.setFutureAction("2022-16-12");
         OportunityDTO op2 = new OportunityDTO();
         try{
             op2 = oportunityService.checkInfo(op);
