@@ -53,7 +53,13 @@ public class OportunityServiceImpl implements OportunityService {
 
 	@Override
 	public OportunityDTO checkInfo(OportunityDTO op) throws InvalidObjectException {
-		return null;
+		if(op.getName()==null)
+			throw  new InvalidObjectException("The information must include name");
+		else if(op.getEmail()==null && op.getPhone()==null)
+			throw  new InvalidObjectException("The information must include email or phone");
+		else if(op.getDescription()==null)
+			throw new InvalidObjectException("The information must include description");
+		return op;
 	}
 
 }
