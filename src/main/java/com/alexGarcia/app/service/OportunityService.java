@@ -5,7 +5,9 @@ import com.alexGarcia.app.entity.Oportunity;
 public interface OportunityService {
 
 	Oportunity addOportunity(Oportunity op);
+
+	Oportunity getOportunity(String name);
 	
-	boolean isOportunity(Oportunity op);
+	Oportunity isOportunity(Oportunity op);
 
 }

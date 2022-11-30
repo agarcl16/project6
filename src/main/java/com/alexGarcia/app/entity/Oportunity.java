@@ -1,5 +1,7 @@
 package com.alexGarcia.app.entity;
 
+
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,6 +38,9 @@ public class Oportunity {
 
 	@OneToMany(mappedBy = "oportunity", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Contact> contacts;
+	
+	@Column(length=500)
+	private String description;
 
 	/**
 	 * @param name
@@ -55,19 +60,18 @@ public class Oportunity {
 	 * @param name
 	 * @param email
 	 * @param phone
-	 * @param contacts
 	 */
-	public Oportunity(String name, String email, String phone) {
+	public Oportunity(String name, String email, String phone, String description) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
+		this.description = description;
 	}
 
 	/**
 	 * @param id
 	 * @param name
-	 * @param client
 	 * @param email
 	 * @param phone
 	 */
@@ -134,4 +138,39 @@ public class Oportunity {
 		this.phone = phone;
 	}
 
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public StringBuilder print(){
+		StringBuilder retorno = new StringBuilder();
+
+		retorno.append("Id: "+this.getId());
+
+		retorno.append("\nName: "+this.getName());
+
+		retorno.append("\nEmail: "+this.getEmail());
+
+		retorno.append("\nPhone: "+this.getPhone());
+
+		retorno.append("\nDescription: "+this.getDescription());
+
+		retorno.append("\nClient: ");
+		if(this.getClient()!=null)
+			retorno.append(this.getClient());
+		else
+			retorno.append("F");
+
+		retorno.append("\nContacts: ");
+		for(Contact contact : this.getContacts()){
+			retorno.append("\n"+contact.print());
+		}
+
+		return retorno;
+	}
 }

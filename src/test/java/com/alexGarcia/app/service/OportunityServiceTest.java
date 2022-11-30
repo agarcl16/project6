@@ -1,58 +1,48 @@
 package com.alexGarcia.app.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import com.alexGarcia.app.entity.Oportunity;
+import com.alexGarcia.app.repository.ContactRepository;
 import com.alexGarcia.app.repository.OportunityRepository;
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
-@ExtendWith(MockitoExtension.class)
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
 public class OportunityServiceTest {
 
-	@InjectMocks
-	private OportunityServiceImpl oportunityService;
+    @Autowired
+    OportunityService oportunityService;
+    @Autowired
+    OportunityRepository oportunityRepository;
+    @Autowired
+    ContactRepository contactRepository;
 
-	@Mock
-	private OportunityRepository oportunityRepository;
+    @Test
+    public void testIsOportunityNoExists() {
 
-	/*
-	 * We have to create an oportunity, but we cannot create it if there is no
-	 * contact.
-	 */
+        Oportunity op = new Oportunity("Pedro", "alex09945@gmail.com", "+34638731011", "Cosa");
 
-	@Test
-	public void testIsOportunityNoExists() {
+        Assert.assertEquals(null, oportunityService.isOportunity(op));
+    }
 
-		Oportunity op = new Oportunity("Alex", "alex09945@gmail.com", "+34638731011");
+    @Test
+    public void testIsOportunityExists() {
 
-		assertFalse(oportunityService.isOportunity(op));
+        Oportunity op = new Oportunity("Carlos", "alex09945@gmail.com", "+34638731011", "cosa");
 
-	}
+        oportunityService.addOportunity(op);
 
-	@Test
-	public void testCreateOportunity() {
+        Assert.assertEquals("Carlos", oportunityService.isOportunity(op).getName());
+    }
 
-		Oportunity op = new Oportunity("Alex", "alex09945@gmail.com", "+34638731011");
-		
-		@SuppressWarnings("removal")
-		Long uno = new Long("1");
-		
-		Mockito.when(oportunityRepository.save(op)).thenReturn(new Oportunity(uno,"Alex","alex09945@gmail.com","+34638731011"));
-
-		Oportunity op2 = oportunityService.addOportunity(op);
-		
-		assertEquals("Alex",op2.getName());
-	}
-
+    @Test
+    public void testCreateOportunity() {
+        Oportunity op = new Oportunity("Alex", "alex09945@gmail.com", "+34638731011", "algo");
+        Oportunity op2 = oportunityService.addOportunity(op);
+        Assert.assertEquals("Alex",op2.getName());
+    }
 }

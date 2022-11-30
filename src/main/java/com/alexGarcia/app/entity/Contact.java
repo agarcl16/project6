@@ -88,4 +88,9 @@ public class Contact {
 		this.description = description;
 	}
 
+	public String print(){
+		String retorno = "\tId: "+this.getId()+"\n\tName: "+this.getName()+"\n\tDescription: "+this.getDescription();
+		return retorno;
+	}
+
 }
