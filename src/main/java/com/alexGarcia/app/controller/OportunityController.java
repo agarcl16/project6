@@ -22,9 +22,7 @@ public class OportunityController {
 	@PostMapping("/addOportunity")
 	public ResponseEntity addOportunity(@RequestBody OportunityDTO op) {
 
-		Oportunity op1 = new Oportunity();
-
-		Oportunity newOp = oportunityService.addOportunity(op1);
+		Oportunity newOp = oportunityService.addOportunity(op);
 		return ResponseEntity.status(HttpStatus.OK).body(newOp.print());
 	}
 }

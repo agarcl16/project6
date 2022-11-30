@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 import com.alexGarcia.app.dto.OportunityDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,21 +25,9 @@ public class OportunityServiceImpl implements OportunityService {
 	private ContactRepository contactRepository;
 
 	@Override
-	public Oportunity addOportunity(Oportunity op) {
+	public Oportunity addOportunity(OportunityDTO op) {
 
-		Oportunity op2 = isOportunity(op);
-		if(op2==null) {
-			op2 = oportunityRepository.save(op);		
-		}
-		Contact contact = new Contact(op.getName(), op.getDescription());
-		contact.setOportunity(op2);
-		if (op2.getContacts() == null) {
-			List<Contact> list = new ArrayList<Contact>();
-			list.add(contact);
-			op2.setContacts(list);
-		}
-		contactRepository.save(contact);
-		return getOportunity(op2.getName());
+		return null;
 	}
 
 	@Override

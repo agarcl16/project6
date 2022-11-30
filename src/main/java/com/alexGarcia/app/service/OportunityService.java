@@ -7,7 +7,7 @@ import java.io.InvalidObjectException;
 
 public interface OportunityService {
 
-	Oportunity addOportunity(Oportunity op);
+	Oportunity addOportunity(OportunityDTO op);
 
 	Oportunity getOportunity(String name);
 	

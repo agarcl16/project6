@@ -8,89 +8,113 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "contact")
 public class Contact {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "name", nullable = false, unique = true)
-	private String name;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-	@Column(name = "description", nullable = false)
-	private String description;
+    @Column(name = "description", nullable = false)
+    private String description;
 
-	@ManyToOne
-	@JoinColumn(name = "oportunity_id")
-	private Oportunity oportunity;
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
 
-	/**
-	 * 
-	 */
-	public Contact() {
-		super();
-	}
+    @ManyToOne
+    @JoinColumn(name = "oportunity_id")
+    private Oportunity oportunity;
 
-	/**
-	 * @param name
-	 * @param description
-	 */
-	public Contact(String name, String description) {
-		super();
-		this.name = name;
-		this.description = description;
-	}
+    /**
+     *
+     */
+    public Contact() {
+        super();
+    }
 
-	/**
-	 * @param id
-	 * @param name
-	 * @param description
-	 */
-	public Contact(Long id, String name, String description) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-	}
+    /**
+     * @param name
+     * @param description
+     */
+    public Contact(String name, String description) {
+        super();
+        this.name = name;
+        this.description = description;
+    }
 
-	public Oportunity getOportunity() {
-		return oportunity;
-	}
+    /**
+     * @param name
+     * @param description
+     * @param date
+     */
+    public Contact(String name, String description, LocalDate date) {
+        super();
+        this.name = name;
+        this.description = description;
+        this.date = date;
+    }
 
-	public void setOportunity(Oportunity oportunity) {
-		this.oportunity = oportunity;
-	}
+    /**
+     * @param id
+     * @param name
+     * @param description
+     */
+    public Contact(Long id, String name, String description) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Oportunity getOportunity() {
+        return oportunity;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setOportunity(Oportunity oportunity) {
+        this.oportunity = oportunity;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String print(){
-		String retorno = "\tId: "+this.getId()+"\n\tName: "+this.getName()+"\n\tDescription: "+this.getDescription();
-		return retorno;
-	}
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public String print() {
+        String retorno = "\tId: " + this.getId() + "\n\tName: " + this.getName() + "\n\tDescription: " + this.getDescription();
+        return retorno;
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.alexGarcia.app.service;
 
 import com.alexGarcia.app.dto.OportunityDTO;
+import com.alexGarcia.app.entity.Contact;
 import com.alexGarcia.app.entity.Oportunity;
 import com.alexGarcia.app.repository.ContactRepository;
 import com.alexGarcia.app.repository.OportunityRepository;
@@ -13,6 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.InvalidObjectException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -33,27 +36,59 @@ public class OportunityServiceTest {
         Assert.assertEquals(null, oportunityService.isOportunity(op));
     }
 
+    /**
+     * To check a normal oportunity we have testCreateOportunity()
+     * We have to check if there is a new client add the client and add the oportunity to it
+     * If we have a futureDate, generate the new contact
+     * We check the information is valid before access this method
+     * I have to mock some results of the repository, because some information will be added to the database
+     * and in the next execution the test won't work
+     */
     @Test
-    public void testIsOportunityExists() {
-
-        Oportunity op = new Oportunity("Carlos", "alex09945@gmail.com", "+34638731011", "cosa");
-
-        oportunityService.addOportunity(op);
-
-        Assert.assertEquals("Carlos", oportunityService.isOportunity(op).getName());
-    }
-
-    @Test
-    public void testCreateOportunity() {
-        Oportunity op = new Oportunity("Alex", "alex09945@gmail.com", "+34638731011", "algo");
+    public void testAddOportity(){
+        /**
+         * Normal oportunity
+         */
+        OportunityDTO op = new OportunityDTO();
+        op.setName("Alex");
+        op.setEmail("alex09945@gmail.com");
+        op.setPhone("+34638731011");
+        op.setDescription("prueba");
         Oportunity op2 = oportunityService.addOportunity(op);
-        Assert.assertEquals("Alex", op2.getName());
+        Assert.assertNotNull(op2);
+
+        /**
+         * Oportunity with futureDate
+         * We need to check the new Contact
+         */
+        op.setFutureAction("25/12/2023");
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fecha = LocalDate.parse("25/12/2023", formato);
+        Oportunity op1 = oportunityService.getOportunity("Alex");
+        op2 = oportunityService.addOportunity(op);
+        if(op1==null){
+            Assert.assertEquals(op2.getContacts().size(),2);
+        }else{
+            Assert.assertEquals(op2.getContacts().size(),op1.getContacts().size()+2);
+        }
+
+        /**
+         * Oportunity now is client
+         * We have to check if client exists
+         *      if: add the oportunity to that client
+         *      else: create a client and add the oportunity
+         */
+        op.setFutureClient("T");
+        op.setFutureClient("Solera");
+        op2 = oportunityService.addOportunity(op);
+        Assert.assertNotNull(op2.getClient());
+
+
     }
 
     /**
      * We have to check if the information is ok, if it is a new client or if will be a future contact
      */
-
     @Test
     public void testCheckInfo() {
         OportunityDTO op = new OportunityDTO();
