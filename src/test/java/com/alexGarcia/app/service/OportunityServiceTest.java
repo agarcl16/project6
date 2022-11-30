@@ -83,14 +83,15 @@ public class OportunityServiceTest {
 
         op.setFutureClient("T");
         Assert.assertThrows("There is no BussinessName",InvalidObjectException.class,() -> { oportunityService.checkInfo(op);});
+        op.setBussinesName("Solera");
 
         op.setFutureAction("prueba");
-        Assert.assertThrows("Not valid Date",InvalidObjectException.class,() -> { oportunityService.checkInfo(op);});
+        Assert.assertThrows("Not a valid Date",InvalidObjectException.class,() -> { oportunityService.checkInfo(op);});
 
-        op.setFutureAction("2021-10-10");
+        op.setFutureAction("10/11/2021");
         Assert.assertThrows("Future Date must be after today",InvalidObjectException.class,() -> { oportunityService.checkInfo(op);});
 
-        op.setFutureAction("2022-16-12");
+        op.setFutureAction("16/12/2022");
         OportunityDTO op2 = new OportunityDTO();
         try{
             op2 = oportunityService.checkInfo(op);

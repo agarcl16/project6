@@ -30,7 +30,6 @@ public class OportunityDTO {
         this.description = description;
         this.futureClient = furtureClient;
         this.futureAction = futureAction;
-        this.dateAction = dateAction;
     }
 
     public OportunityDTO() {
@@ -60,9 +59,6 @@ public class OportunityDTO {
         this.futureAction = futureAction;
     }
 
-    public void setDateAction(String dateAction) {
-        this.dateAction = dateAction;
-    }
 
     public String getName() {
         return name;
@@ -104,8 +100,5 @@ public class OportunityDTO {
         return futureAction;
     }
 
-    public String getDateAction() {
-        return dateAction;
-    }
 
 }

@@ -1,6 +1,8 @@
 package com.alexGarcia.app.service;
 
 import java.io.InvalidObjectException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BooleanSupplier;
@@ -59,6 +61,20 @@ public class OportunityServiceImpl implements OportunityService {
 			throw  new InvalidObjectException("The information must include email or phone");
 		else if(op.getDescription()==null)
 			throw new InvalidObjectException("The information must include description");
+		else if(op.getFurtureClient().equals("T")){
+			if(op.getBussinesName()==null)
+				throw new InvalidObjectException("There is no BussinessName");
+		}
+		if(op.getFutureAction()!=null){
+			try{
+				DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				LocalDate fecha = LocalDate.parse(op.getFutureAction(), formato);
+				if(fecha.isBefore(LocalDate.now())||fecha.isEqual((LocalDate.now())))
+					throw new InvalidObjectException("Future Date must be after today");
+			}catch(Exception e){
+				throw new InvalidObjectException("Not a valid Date");
+			}
+		}
 		return op;
 	}
 
