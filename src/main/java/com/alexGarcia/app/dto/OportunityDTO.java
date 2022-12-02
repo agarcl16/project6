@@ -13,18 +13,17 @@ public class OportunityDTO {
      */
     private Long id;
     private String name;
-    private String BussinesName;
+    private String bussinesName;
     private String email;
     private String phone;
     private String description;
     private String futureClient;
     private String futureAction;
-    private String dateAction;
 
     public OportunityDTO(Long id, String name, String bussinesName, String email, String phone, String description, String furtureClient, String futureAction, String dateAction) {
         this.id = id;
         this.name = name;
-        BussinesName = bussinesName;
+        this.bussinesName = bussinesName;
         this.email = email;
         this.phone = phone;
         this.description = description;
@@ -36,7 +35,7 @@ public class OportunityDTO {
     }
 
     public void setBussinesName(String bussinesName) {
-        BussinesName = bussinesName;
+        this.bussinesName = bussinesName;
     }
 
     public void setEmail(String email) {
@@ -77,7 +76,7 @@ public class OportunityDTO {
     }
 
     public String getBussinesName() {
-        return BussinesName;
+        return this.bussinesName;
     }
 
     public String getEmail() {
@@ -92,7 +91,7 @@ public class OportunityDTO {
         return description;
     }
 
-    public String getFurtureClient() {
+    public String getFutureClient() {
         return futureClient;
     }
 

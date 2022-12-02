@@ -8,4 +8,5 @@ import com.alexGarcia.app.entity.Client;
 @Repository
 public interface ClientRepository extends JpaRepository<Client,Long> {
 
+    Client findByName(String name);
 }

@@ -4,16 +4,7 @@ package com.alexGarcia.app.entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "oportunity")
@@ -36,7 +27,7 @@ public class Oportunity {
 	@Column(length = 50)
 	private String phone;
 
-	@OneToMany(mappedBy = "oportunity", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "oportunity",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Contact> contacts;
 	
 	@Column(length=500)
@@ -162,7 +153,7 @@ public class Oportunity {
 
 		retorno.append("\nClient: ");
 		if(this.getClient()!=null)
-			retorno.append(this.getClient());
+			retorno.append(this.getClient().getName());
 		else
 			retorno.append("F");
 

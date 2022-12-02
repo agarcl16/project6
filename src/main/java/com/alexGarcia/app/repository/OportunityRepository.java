@@ -9,6 +9,4 @@ import com.alexGarcia.app.entity.Oportunity;
 public interface OportunityRepository extends JpaRepository<Oportunity, Long> {
 
 	public Oportunity findByName(String name);
-
-
 }

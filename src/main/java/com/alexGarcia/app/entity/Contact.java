@@ -27,6 +27,12 @@ public class Contact {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
+
     @ManyToOne
     @JoinColumn(name = "oportunity_id")
     private Oportunity oportunity;
@@ -110,6 +116,22 @@ public class Contact {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String print() {

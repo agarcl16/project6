@@ -1,14 +1,12 @@
 package com.alexGarcia.app.service;
 
 import com.alexGarcia.app.dto.OportunityDTO;
-import com.alexGarcia.app.entity.Contact;
 import com.alexGarcia.app.entity.Oportunity;
 import com.alexGarcia.app.repository.ContactRepository;
 import com.alexGarcia.app.repository.OportunityRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.InvalidPropertyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -50,12 +48,12 @@ public class OportunityServiceTest {
          * Normal oportunity
          */
         OportunityDTO op = new OportunityDTO();
-        op.setName("Alex");
+        op.setName("Pedro");
         op.setEmail("alex09945@gmail.com");
         op.setPhone("+34638731011");
         op.setDescription("prueba");
-        Oportunity op2 = oportunityService.addOportunity(op);
-        Assert.assertNotNull(op2);
+        Oportunity op1 = oportunityService.addOportunity(op);
+        Assert.assertNotNull(op1);
 
         /**
          * Oportunity with futureDate
@@ -64,13 +62,9 @@ public class OportunityServiceTest {
         op.setFutureAction("25/12/2023");
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate fecha = LocalDate.parse("25/12/2023", formato);
-        Oportunity op1 = oportunityService.getOportunity("Alex");
-        op2 = oportunityService.addOportunity(op);
-        if(op1==null){
-            Assert.assertEquals(op2.getContacts().size(),2);
-        }else{
-            Assert.assertEquals(op2.getContacts().size(),op1.getContacts().size()+2);
-        }
+        Oportunity op3 = oportunityService.getOportunity(op.getName());
+        Oportunity op2 = oportunityService.addOportunity(op);
+        Assert.assertEquals(op2.getContacts().size(),op3.getContacts().size()+2);
 
         /**
          * Oportunity now is client
@@ -79,11 +73,9 @@ public class OportunityServiceTest {
          *      else: create a client and add the oportunity
          */
         op.setFutureClient("T");
-        op.setFutureClient("Solera");
+        op.setBussinesName("Solera");
         op2 = oportunityService.addOportunity(op);
-        Assert.assertNotNull(op2.getClient());
-
-
+        Assert.assertEquals(op2.getClient().getName(),"Solera");
     }
 
     /**
